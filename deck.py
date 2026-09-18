@@ -11,6 +11,12 @@ class Card:
 
     def __repr__(self):
         return self.__str__()
+        
+    def __eq__(self, other):
+    if not isinstance(other, Card):
+        return False
+
+    return self.rank == other.rank and self.suit == other.suit
 
 
 class Deck:
