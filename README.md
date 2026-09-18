@@ -1,73 +1,62 @@
-# Poker Strategy & Monte Carlo Simulation Engine
+# Poker Strategy & Monte Carlo Simulation
 
-I'm building a Texas Hold'em poker simulation in Python to explore how probability and decision-making can be applied to a game with incomplete information.
+A Python project that simulates Texas Hold'em poker and uses Monte Carlo simulation to estimate the probability of winning a hand.
 
-The main goal of the project is to build a poker bot that can estimate the probability of winning a hand and use those estimates to make decisions.
+## What the Project Does
 
-## What I'm Building
+The program:
 
-The project will be developed in several stages:
+- Creates and shuffles a standard 52-card deck
+- Deals hole cards and community cards
+- Evaluates poker hands and determines the strongest possible 5-card combination
+- Simulates thousands of possible opponent hands and future community cards
+- Estimates win, tie and loss probabilities
+- Calculates overall hand equity
+- Uses pot odds and expected value to explore poker decision-making
 
-- Build a complete 52-card deck and poker game mechanics
-- Evaluate poker hands and determine the winner
-- Use Monte Carlo simulation to estimate hand equity
-- Calculate pot odds and expected value
-- Build a basic betting strategy
-- Model opponent behaviour
-- Compare different strategies through large-scale simulations
+## Monte Carlo Simulation
 
-## Current Progress
+At any point in a poker hand, some information is unknown. For example, after the flop, the opponent's cards, turn and river are unknown.
 
-### Completed
-- Card class
-- Deck class
-- Card shuffling
-- Dealing individual cards
-- Dealing multiple cards
+The simulation repeatedly generates possible outcomes and evaluates the resulting hands.
 
-### In Progress
-- Poker hand evaluation
-- Monte Carlo simulation
-- Decision-making strategy
-- Opponent modelling
+For each simulation:
 
-## How the Simulation Will Work
+1. Generate a possible opponent hand
+2. Generate the remaining community cards
+3. Evaluate the player's hand
+4. Evaluate the opponent's hand
+5. Record the outcome
 
-For example, suppose the bot has:
+After many simulations, the program estimates:
 
-**A♠ K♠**
+- Win probability
+- Tie probability
+- Loss probability
+- Hand equity
 
-and the flop is:
+Equity is calculated as:
 
-**Q♠ 7♦ 2♠**
+\[
+Equity = P(Win) + \frac{1}{2}P(Tie)
+\]
 
-The bot knows its own cards and the community cards, but does not know the opponent's cards or the turn and river.
+## Example
 
-The Monte Carlo engine will simulate many possible combinations of:
-
-1. Opponent cards
-2. Turn card
-3. River card
-
-It will then evaluate the resulting hands and estimate:
-
-- Probability of winning
-- Probability of tying
-- Probability of losing
-- Overall hand equity
-
-The bot can then use these estimates when making decisions.
-
-## Project Structure
+For a given hand and flop, the program produces output such as:
 
 ```text
-poker_bot/
-│
-├── deck.py
-├── hand_evaluator.py
-├── simulator.py
-├── strategy.py
-├── opponent_model.py
-├── main.py
-│
-└── README.md
+Bot hand:
+Q♥
+K♦
+
+Flop:
+5♣
+6♦
+8♦
+
+Simulation results:
+Win probability: 0.4024
+Tie probability: 0.0314
+Loss probability: 0.5662
+Equity: 0.4181
